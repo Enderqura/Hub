@@ -1,2 +1,2 @@
 # Hub
-# This Plugin is for the hub of Oasis Factions
+This Plugin is for the hub of Oasis Factions
