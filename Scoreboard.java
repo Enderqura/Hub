@@ -1,9 +1,14 @@
 //Seperate plugin (Main Class)
 
+//ChatColor.GOLD + "" + ChatColor.BOLD + 
+
 package com.enderqura.scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -31,16 +36,17 @@ public class Main extends JavaPlugin implements Listener{
 		board = manager.getNewScoreboard();
 		
 		Objective objective = board.registerNewObjective("Test", "Test2");
-		objective.setDisplayName(ChatColor.AQUA + "Statistics");
+		objective.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD +"Oasis Factions");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
 		Team team = board.registerNewTeam("Team");
 		team.setDisplayName(ChatColor.RED + "");
 		
+
 		int a = Bukkit.getOnlinePlayers().size();
 		int c = Bukkit.getMaxPlayers();
 		
-		Score score = objective.getScore(Bukkit.getOfflinePlayer(""));
+		Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GRAY + "   "));
 		score.setScore(16);
 		
 		Score score1 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players"));
@@ -49,7 +55,7 @@ public class Main extends JavaPlugin implements Listener{
 		Score score2 = objective.getScore(Bukkit.getOfflinePlayer(a + " / " + c));
 		score2.setScore(14);
 		
-		Score score3 = objective.getScore(Bukkit.getOfflinePlayer(""));
+		Score score3 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GRAY + "  "));
 		score3.setScore(13);
 		
 		Score score4 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Rank"));
@@ -58,7 +64,7 @@ public class Main extends JavaPlugin implements Listener{
 		Score score5 = objective.getScore(Bukkit.getOfflinePlayer("Owner"));
 		score5.setScore(11);
 		
-		Score score6 = objective.getScore(Bukkit.getOfflinePlayer(""));
+		Score score6 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GRAY + " "));
 		score6.setScore(10);
 		
 		Score score7 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Store"));
@@ -67,22 +73,22 @@ public class Main extends JavaPlugin implements Listener{
 		Score score8 = objective.getScore(Bukkit.getOfflinePlayer("store.oasisfactions.com"));
 		score8.setScore(8);
 		
-		Score score9 = objective.getScore(Bukkit.getOfflinePlayer(""));
+		Score score9 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GRAY + ""));
 		score9.setScore(7);
 		
-		Score score10 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Store"));
+		Score score10 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Forums"));
 		score10.setScore(6);
 		
 		Score score11 = objective.getScore(Bukkit.getOfflinePlayer("forums.oasisfactions.com"));
 		score11.setScore(5);
 		
-		Score score12 = objective.getScore(Bukkit.getOfflinePlayer(""));
+		Score score12 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GRAY + "    "));
 		score12.setScore(4);
 		
-		Score score13 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Store"));
+		Score score13 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GOLD + "" + ChatColor.BOLD + "Next Realm"));
 		score13.setScore(3);
 		
-		Score score14 = objective.getScore(Bukkit.getOfflinePlayer("store.oasisfactions.com"));
+		Score score14 = objective.getScore(Bukkit.getOfflinePlayer("Islands Realm"));
 		score14.setScore(2);
 		
 	}
@@ -92,6 +98,18 @@ public class Main extends JavaPlugin implements Listener{
 		e.getPlayer().setScoreboard(board);
 	}
 	
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		
+		
+		if (label.equalsIgnoreCase("oboard")) {
+			Player player = (Player) sender;
+			player.setScoreboard(board);
+			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Switched to correct board");
+		}
+		return false;
+	}
+		
 }
 
 
