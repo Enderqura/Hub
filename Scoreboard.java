@@ -22,6 +22,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 public class Main extends JavaPlugin implements Listener{
+	static ArrayList<String> A = new ArrayList<String>();
 	Scoreboard board;
 
 	public void onEnable(){
@@ -31,7 +32,7 @@ public class Main extends JavaPlugin implements Listener{
 		scoreboard();
 	}
 	
-	public void scoreboard(){
+	public void add(){
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		board = manager.getNewScoreboard();
 		
@@ -91,24 +92,43 @@ public class Main extends JavaPlugin implements Listener{
 		Score score14 = objective.getScore(Bukkit.getOfflinePlayer("Islands Realm"));
 		score14.setScore(2);
 		
+		A.clear();
+		A.add("1");
+		
+		BukkitScheduler Scheduler = Bukkit.getServer().getScheduler();
+		Scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+			@Override
+			public void run() {
+				Integer i = A.size();
+				if(i == 1) {
+					objective.setDisplayName(Colors("&b&lOasis Factions"));
+					A.add("A");
+				}
+				if(i == 2) {
+					objective.setDisplayName(Colors("&5&lOasis Factions"));
+					A.add("B");
+				}
+				if(i == 3) {
+					objective.setDisplayName(Colors("&d&lOasis Factions"));
+					A.add("C");
+				}
+				if(i == 3) {
+					A.clear();
+					A.add("1");
+				}
+			}
+		}, 0, 5);
+player.setScoreboard(board);
+		
 	}
 	
 	@EventHandler
 	public void onjoin(PlayerJoinEvent e){
-		e.getPlayer().setScoreboard(board);
+		Player p = e.getPlayer();
+		this.add(p);
 	}
 	
 	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		
-		
-		if (label.equalsIgnoreCase("oboard")) {
-			Player player = (Player) sender;
-			player.setScoreboard(board);
-			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Switched to correct board");
-		}
-		return false;
-	}
 		
 }
 
